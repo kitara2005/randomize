@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng Random Tham số</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Ocean waves effect -->
+    <div class="ocean-waves" id="oceanWaves"></div>
+    
+    <!-- Floating bubbles -->
+    <div class="bubble" id="bubble1"></div>
+    <div class="bubble" id="bubble2"></div>
+    <div class="bubble" id="bubble3"></div>
+    <div class="bubble" id="bubble4"></div>
+    <div class="bubble" id="bubble5"></div>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="ocean-explosion">
+                <div class="wave-ring"></div>
+                <div class="wave-ring"></div>
+                <div class="wave-ring"></div>
+                <div class="wave-ring"></div>
+                <div class="baby-shark"></div>
+            </div>
+            <div class="loading-text" id="loadingText">Đang tạo random...</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🎲 Random Tham số</h1>
+            <p>Tạo ngẫu nhiên các tham số theo yêu cầu của bạn</p>
+        </header>
+
+        <main>
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="numbers">🔢 Random Số</button>
+                <button class="tab-btn" data-tab="list">📝 Random Danh sách</button>
+            </div>
+
+            <!-- Numbers Tab -->
+            <div class="tab-content active" id="numbers-tab">
+                <div class="input-section">
+                    <h2>Nhập tham số cần random</h2>
+                    <div class="parameter-inputs">
+                        <div class="input-group">
+                            <label for="minValue">Giá trị tối thiểu:</label>
+                            <input type="number" id="minValue" placeholder="0" value="1">
+                        </div>
+                        <div class="input-group">
+                            <label for="maxValue">Giá trị tối đa:</label>
+                            <input type="number" id="maxValue" placeholder="100" value="100">
+                        </div>
+                        <div class="input-group">
+                            <label for="count">Số lượng kết quả:</label>
+                            <input type="number" id="count" placeholder="1" value="1" min="1" max="100">
+                        </div>
+                        <div class="input-group">
+                            <label for="decimalPlaces">Số chữ số thập phân:</label>
+                            <input type="number" id="decimalPlaces" placeholder="0" value="0" min="0" max="10">
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="allowDuplicates" checked>
+                            Cho phép trùng lặp
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="sortResults">
+                            Sắp xếp kết quả
+                        </label>
+                    </div>
+
+                    <button id="generateBtn" class="generate-btn">🎯 Tạo Random</button>
+                </div>
+
+                <div class="result-section">
+                    <h2>Kết quả</h2>
+                    <div id="result" class="result-display">
+                        <p class="placeholder">Nhấn nút "Tạo Random" để bắt đầu</p>
+                    </div>
+                    <div class="result-actions">
+                        <button id="copyBtn" class="action-btn" disabled>📋 Sao chép</button>
+                        <button id="clearBtn" class="action-btn" disabled>🗑️ Xóa</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- List Tab -->
+            <div class="tab-content" id="list-tab">
+                <div class="input-section">
+                    <h2>Random từ danh sách</h2>
+                    <div class="list-input-group">
+                        <label for="listInput">Nhập danh sách (mỗi dòng một mục):</label>
+                        <textarea id="listInput" placeholder="Nhập danh sách của bạn ở đây...&#10;Ví dụ:&#10;Táo&#10;Cam&#10;Chuối&#10;Xoài" rows="8"></textarea>
+                    </div>
+                    
+                    <button id="generateListBtn" class="generate-btn">🌊 Random từ danh sách</button>
+                </div>
+
+                <div class="result-section">
+                    <h2>Kết quả</h2>
+                    <div id="listResult" class="result-display">
+                        <p class="placeholder">Nhấn nút "Random từ danh sách" để bắt đầu</p>
+                    </div>
+                    <div class="result-actions">
+                        <button id="copyListBtn" class="action-btn" disabled>📋 Sao chép</button>
+                        <button id="clearListBtn" class="action-btn" disabled>🗑️ Xóa</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-section">
+                <h2>Lịch sử</h2>
+                <div id="history" class="history-list">
+                    <p class="placeholder">Chưa có lịch sử</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
