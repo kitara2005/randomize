@@ -213,7 +213,7 @@ class RandomParameterApp {
 
         try {
             // Simulate loading time - đủ để xem cá mập bơi qua
-            await this.simulateLoading(3000);
+            await this.simulateLoading(1500);
 
             const min = parseFloat(this.minValueInput.value);
             const max = parseFloat(this.maxValueInput.value);
@@ -251,7 +251,7 @@ class RandomParameterApp {
 
         try {
             // Simulate loading time - đủ để xem cá mập bơi qua
-            await this.simulateLoading(3000);
+            await this.simulateLoading(1500);
 
             const listText = this.listInput.value.trim();
             const items = this.parseList(listText);
@@ -294,12 +294,12 @@ class RandomParameterApp {
     }
 
     displayListResults(results, displayElement) {
-        const itemsHtml = results.map(item => 
-            `<span class="number-badge">${item}</span>`
+        const itemsHtml = results.map((item, index) => 
+            `<div class="list-item">${index + 1}. ${item}</div>`
         ).join('');
 
         displayElement.innerHTML = `
-            <div class="result-numbers">
+            <div class="result-list">
                 ${itemsHtml}
             </div>
         `;
@@ -366,12 +366,26 @@ class RandomParameterApp {
     }
 
     copyResults(displayElement) {
-        const numbers = Array.from(displayElement.querySelectorAll('.number-badge'))
-            .map(badge => badge.textContent)
-            .join(', ');
+        let content = '';
+        
+        // Kiểm tra xem có phải là list hay numbers
+        const listItems = displayElement.querySelectorAll('.list-item');
+        const numberBadges = displayElement.querySelectorAll('.number-badge');
+        
+        if (listItems.length > 0) {
+            // Đối với list, chỉ lấy giá trị không lấy số thứ tự, không có dấu phẩy
+            content = Array.from(listItems)
+                .map(item => item.textContent.replace(/^\d+\.\s*/, '')) // Loại bỏ số thứ tự và dấu chấm
+                .join(' '); // Chỉ dùng khoảng trắng, không có dấu phẩy
+        } else if (numberBadges.length > 0) {
+            // Đối với numbers, lấy giá trị như cũ với dấu phẩy
+            content = Array.from(numberBadges)
+                .map(badge => badge.textContent)
+                .join(', ');
+        }
 
-        if (numbers) {
-            navigator.clipboard.writeText(numbers).then(() => {
+        if (content) {
+            navigator.clipboard.writeText(content).then(() => {
                 this.showCopySuccess(this.copyBtn);
             }).catch(() => {
                 this.showCopyError(this.copyBtn);
@@ -542,7 +556,7 @@ class RandomParameterApp {
             bubble.className = 'shark-bubble';
             bubble.style.left = Math.random() * 100 + '%';
             bubble.style.bottom = '0';
-            bubble.style.animationDelay = Math.random() * 2 + 's';
+            bubble.style.animationDelay = Math.random() * 1 + 's';
             
             sharkBubbles.appendChild(bubble);
             
@@ -551,11 +565,11 @@ class RandomParameterApp {
                 if (bubble.parentNode) {
                     bubble.parentNode.removeChild(bubble);
                 }
-            }, 3000);
+            }, 1500);
         };
 
-        // Tạo bong bóng liên tục
-        this.bubbleInterval = setInterval(createBubble, 300);
+        // Tạo bong bóng liên tục - nhanh hơn
+        this.bubbleInterval = setInterval(createBubble, 150);
     }
 
     clearSharkBubbles() {
