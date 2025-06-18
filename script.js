@@ -4,7 +4,10 @@ class RandomParameterApp {
         this.initializeElements();
         this.bindEvents();
         this.loadHistory();
-        this.currentTab = 'numbers';
+        this.currentTab = 'list';
+        
+        // Mặc định hiển thị tab list
+        this.switchTab('list');
     }
 
     initializeElements() {
@@ -501,10 +504,12 @@ class RandomParameterApp {
         this.loadingText.textContent = message;
         this.loadingOverlay.classList.add('active');
         this.createLoadingParticles();
+        this.createSharkBubbles();
     }
 
     hideLoading() {
         this.loadingOverlay.classList.remove('active');
+        this.clearSharkBubbles();
     }
 
     createLoadingParticles() {
@@ -527,6 +532,42 @@ class RandomParameterApp {
                     }
                 }, 2000);
             }, i * 100);
+        }
+    }
+
+    createSharkBubbles() {
+        const sharkBubbles = document.getElementById('sharkBubbles');
+        if (!sharkBubbles) return;
+
+        // Tạo bong bóng theo cá mập
+        const createBubble = () => {
+            const bubble = document.createElement('div');
+            bubble.className = 'shark-bubble';
+            bubble.style.left = Math.random() * 100 + '%';
+            bubble.style.bottom = '0';
+            bubble.style.animationDelay = Math.random() * 2 + 's';
+            
+            sharkBubbles.appendChild(bubble);
+            
+            // Remove bubble after animation
+            setTimeout(() => {
+                if (bubble.parentNode) {
+                    bubble.parentNode.removeChild(bubble);
+                }
+            }, 3000);
+        };
+
+        // Tạo bong bóng liên tục
+        this.bubbleInterval = setInterval(createBubble, 300);
+    }
+
+    clearSharkBubbles() {
+        if (this.bubbleInterval) {
+            clearInterval(this.bubbleInterval);
+        }
+        const sharkBubbles = document.getElementById('sharkBubbles');
+        if (sharkBubbles) {
+            sharkBubbles.innerHTML = '';
         }
     }
 

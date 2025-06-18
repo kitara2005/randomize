@@ -787,66 +787,124 @@ body.ocean-theme .placeholder {
 /* Baby shark swimming */
 .baby-shark {
     position: absolute;
-    width: 60px;
-    height: 30px;
-    background: linear-gradient(45deg, #4facfe, #00f2fe);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    width: 80px;
+    height: 50px;
+    font-size: 60px;
     animation: sharkSwim 3s ease-in-out infinite;
     z-index: 10;
+    filter: drop-shadow(0 0 10px rgba(79, 172, 254, 0.5));
+    transform-origin: center;
 }
 
+/* Cá mập dễ thương với nhiều animation */
 .baby-shark::before {
-    content: '';
+    content: '🦈';
     position: absolute;
-    top: 5px;
-    left: 45px;
-    width: 15px;
-    height: 20px;
-    background: inherit;
-    border-radius: 0 50% 50% 0;
-    transform: rotate(-15deg);
+    font-size: 60px;
+    animation: sharkWiggle 0.5s ease-in-out infinite alternate;
 }
 
 .baby-shark::after {
-    content: '';
+    content: '💙';
     position: absolute;
-    top: 8px;
-    left: 5px;
-    width: 8px;
-    height: 8px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    font-size: 20px;
+    top: -15px;
+    right: -10px;
+    animation: heartBeat 1s ease-in-out infinite;
+    opacity: 0.8;
 }
 
 @keyframes sharkSwim {
     0% {
-        transform: translateX(-100px) translateY(0) rotate(0deg);
+        transform: translateX(-120px) translateY(0) scale(0.8) rotateY(0deg);
         opacity: 0;
     }
     20% {
         opacity: 1;
+        transform: translateX(-80px) translateY(-10px) scale(1) rotateY(0deg);
     }
     40% {
-        transform: translateX(-50px) translateY(-20px) rotate(5deg);
+        transform: translateX(-40px) translateY(0) scale(1.1) rotateY(5deg);
+    }
+    50% {
+        transform: translateX(0px) translateY(-5px) scale(1.2) rotateY(0deg);
     }
     60% {
-        transform: translateX(0px) translateY(0px) rotate(0deg);
+        transform: translateX(0px) translateY(-10px) scale(1) rotateY(-5deg);
     }
     80% {
-        transform: translateX(50px) translateY(20px) rotate(-5deg);
+        transform: translateX(40px) translateY(0) scale(1.1) rotateY(0deg);
         opacity: 1;
     }
     100% {
-        transform: translateX(100px) translateY(0) rotate(0deg);
+        transform: translateX(120px) translateY(-10px) scale(0.8) rotateY(0deg);
+        opacity: 0;
+    }
+}
+
+@keyframes sharkWiggle {
+    0% {
+        transform: rotate(-5deg) scale(1);
+    }
+    100% {
+        transform: rotate(5deg) scale(1.05);
+    }
+}
+
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* Bong bóng theo cá mập */
+.shark-bubbles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.shark-bubble {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: bubbleFloat 2s ease-out infinite;
+}
+
+@keyframes bubbleFloat {
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-50px) scale(1);
         opacity: 0;
     }
 }
 
 /* Ocean theme shark */
 body.ocean-theme .baby-shark {
-    background: linear-gradient(45deg, #00f2fe, #4facfe);
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+    filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.6));
+}
+
+body.ocean-theme .baby-shark::before {
+    filter: hue-rotate(180deg) brightness(1.2);
+}
+
+body.ocean-theme .shark-bubble {
+    background: rgba(0, 242, 254, 0.4);
+    box-shadow: 0 0 5px rgba(0, 242, 254, 0.3);
 }
 
 .loading-text {
