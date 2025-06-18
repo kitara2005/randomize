@@ -8,12 +8,25 @@
 
 body {
     font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80') no-repeat center center fixed;
+    background-size: cover;
     min-height: 100vh;
-    color: #22223b;
+    color: #fff;
     transition: background 0.5s;
     position: relative;
     overflow-x: hidden;
+}
+
+/* Overlay để làm tối background một chút */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.4) 0%, rgba(42, 82, 152, 0.3) 50%, rgba(79, 172, 254, 0.2) 100%);
+    z-index: -2;
 }
 
 /* Ocean background for list tab */
@@ -114,7 +127,7 @@ header {
     text-align: center;
     margin-bottom: 32px;
     color: #fff;
-    text-shadow: 0 4px 24px rgba(161, 140, 209, 0.3);
+    text-shadow: 0 4px 24px rgba(30, 60, 114, 0.4);
 }
 
 body.ocean-theme header {
@@ -126,7 +139,7 @@ header h1 {
     margin-bottom: 8px;
     font-weight: 700;
     letter-spacing: 1px;
-    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -153,15 +166,15 @@ header p {
 
 .tab-btn {
     padding: 14px 32px;
-    background: rgba(255,255,255,0.25);
-    color: #5f4b8b;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
     border: none;
     border-radius: 18px;
     cursor: pointer;
     font-size: 1.1rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    box-shadow: 0 2px 12px rgba(161, 140, 209, 0.08);
+    box-shadow: 0 2px 12px rgba(79, 172, 254, 0.2);
     transition: all 0.2s;
     outline: none;
     position: relative;
@@ -175,9 +188,9 @@ body.ocean-theme .tab-btn {
 }
 
 .tab-btn.active, .tab-btn:focus {
-    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
     color: #fff;
-    box-shadow: 0 6px 24px rgba(161, 140, 209, 0.18);
+    box-shadow: 0 6px 24px rgba(79, 172, 254, 0.3);
     transform: scale(1.04);
 }
 
@@ -187,8 +200,8 @@ body.ocean-theme .tab-btn.active {
 }
 
 .tab-btn:hover:not(.active) {
-    background: rgba(255,255,255,0.4);
-    color: #7c5fe6;
+    background: rgba(255,255,255,0.3);
+    color: #4facfe;
 }
 
 body.ocean-theme .tab-btn:hover:not(.active) {
@@ -219,12 +232,13 @@ main {
 }
 
 .input-section, .result-section {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.9);
     border-radius: 28px;
     padding: 28px 20px;
-    box-shadow: 0 8px 32px rgba(161, 140, 209, 0.13);
+    box-shadow: 0 8px 32px rgba(79, 172, 254, 0.15);
     margin-bottom: 18px;
     transition: box-shadow 0.3s;
+    backdrop-filter: blur(10px);
 }
 
 body.ocean-theme .input-section,
@@ -235,7 +249,7 @@ body.ocean-theme .result-section {
 }
 
 .input-section:hover, .result-section:hover {
-    box-shadow: 0 12px 40px rgba(161, 140, 209, 0.18);
+    box-shadow: 0 12px 40px rgba(79, 172, 254, 0.25);
 }
 
 body.ocean-theme .input-section:hover,
@@ -244,11 +258,11 @@ body.ocean-theme .result-section:hover {
 }
 
 h2 {
-    color: #5f4b8b;
+    color: #1e3c72;
     margin-bottom: 18px;
     font-size: 1.3rem;
     font-weight: 700;
-    border-bottom: 2px solid #fbc2eb;
+    border-bottom: 2px solid #4facfe;
     padding-bottom: 8px;
     letter-spacing: 0.5px;
 }
@@ -273,7 +287,7 @@ body.ocean-theme h2 {
 .input-group label {
     font-weight: 600;
     margin-bottom: 6px;
-    color: #7c5fe6;
+    color: #1e3c72;
     font-size: 1rem;
 }
 
@@ -287,14 +301,14 @@ body.ocean-theme .input-group label {
     border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s;
-    background: #f7f6fd;
+    background: rgba(255,255,255,0.8);
     font-family: inherit;
 }
 
 .input-group input:focus {
     outline: none;
-    border-color: #a18cd1;
-    box-shadow: 0 0 0 3px #fbc2eb55;
+    border-color: #4facfe;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
 }
 
 body.ocean-theme .input-group input:focus {
@@ -323,7 +337,7 @@ body.ocean-theme .input-group input:focus {
     font-family: inherit;
     resize: vertical;
     min-height: 100px;
-    background: #f7f6fd;
+    background: rgba(255,255,255,0.8);
     transition: all 0.3s;
     line-height: 1.5;
 }
@@ -335,8 +349,8 @@ body.ocean-theme .list-input-group textarea {
 
 .list-input-group textarea:focus {
     outline: none;
-    border-color: #a18cd1;
-    box-shadow: 0 0 0 3px #fbc2eb55;
+    border-color: #4facfe;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
 }
 
 body.ocean-theme .list-input-group textarea:focus {
@@ -370,7 +384,7 @@ body.ocean-theme .list-input-group textarea:focus {
     gap: 8px;
     cursor: pointer;
     font-weight: 500;
-    color: #7c5fe6;
+    color: #1e3c72;
     font-size: 1rem;
 }
 
@@ -381,7 +395,7 @@ body.ocean-theme .checkbox-label {
 .checkbox-label input[type="checkbox"] {
     width: 18px;
     height: 18px;
-    accent-color: #a18cd1;
+    accent-color: #4facfe;
 }
 
 body.ocean-theme .checkbox-label input[type="checkbox"] {
@@ -391,7 +405,7 @@ body.ocean-theme .checkbox-label input[type="checkbox"] {
 .generate-btn {
     width: 100%;
     padding: 16px 0;
-    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
     color: #fff;
     border: none;
     border-radius: 18px;
@@ -399,7 +413,7 @@ body.ocean-theme .checkbox-label input[type="checkbox"] {
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 4px 16px rgba(161, 140, 209, 0.13);
+    box-shadow: 0 4px 16px rgba(79, 172, 254, 0.2);
     letter-spacing: 1px;
     margin-top: 8px;
 }
@@ -410,9 +424,9 @@ body.ocean-theme .generate-btn {
 }
 
 .generate-btn:hover, .generate-btn:focus {
-    background: linear-gradient(90deg, #fbc2eb 0%, #a18cd1 100%);
-    color: #7c5fe6;
-    box-shadow: 0 8px 32px rgba(161, 140, 209, 0.18);
+    background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(79, 172, 254, 0.3);
     transform: scale(1.03);
 }
 
@@ -423,8 +437,8 @@ body.ocean-theme .generate-btn:hover {
 }
 
 .result-display {
-    background: #f7f6fd;
-    border: 2px solid #fbc2eb;
+    background: rgba(255,255,255,0.8);
+    border: 2px solid #4facfe;
     border-radius: 18px;
     padding: 20px;
     min-height: 90px;
@@ -441,7 +455,7 @@ body.ocean-theme .result-display {
 }
 
 .result-display .placeholder {
-    color: #b8a1d1;
+    color: #1e3c72;
     font-style: italic;
     text-align: center;
     font-size: 1.05rem;
@@ -459,13 +473,13 @@ body.ocean-theme .result-display .placeholder {
 }
 
 .number-badge {
-    background: linear-gradient(120deg, #a18cd1 0%, #fbc2eb 100%);
+    background: linear-gradient(120deg, #4facfe 0%, #00f2fe 100%);
     color: #fff;
     padding: 10px 20px;
     border-radius: 22px;
     font-weight: 700;
     font-size: 1.1rem;
-    box-shadow: 0 2px 8px rgba(161, 140, 209, 0.13);
+    box-shadow: 0 2px 8px rgba(79, 172, 254, 0.2);
     animation: fadeIn 0.5s;
     letter-spacing: 0.5px;
     transition: background 0.3s, color 0.3s;
@@ -477,11 +491,6 @@ body.ocean-theme .number-badge {
 }
 
 .number-badge:hover {
-    background: linear-gradient(120deg, #fbc2eb 0%, #a18cd1 100%);
-    color: #7c5fe6;
-}
-
-body.ocean-theme .number-badge:hover {
     background: linear-gradient(120deg, #00f2fe 0%, #4facfe 100%);
     color: #fff;
 }
@@ -494,15 +503,15 @@ body.ocean-theme .number-badge:hover {
 .action-btn {
     flex: 1;
     padding: 12px 0;
-    border: 2px solid #e2e8f0;
+    border: 2px solid #4facfe;
     background: #fff;
-    color: #7c5fe6;
+    color: #1e3c72;
     border-radius: 12px;
     cursor: pointer;
     font-weight: 700;
     font-size: 1rem;
     transition: all 0.2s;
-    box-shadow: 0 2px 8px rgba(161, 140, 209, 0.08);
+    box-shadow: 0 2px 8px rgba(79, 172, 254, 0.08);
 }
 
 body.ocean-theme .action-btn {
@@ -511,9 +520,9 @@ body.ocean-theme .action-btn {
 }
 
 .action-btn:hover:not(:disabled) {
-    border-color: #a18cd1;
+    border-color: #4facfe;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
     color: #fff;
-    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
     transform: scale(1.04);
 }
 
@@ -529,11 +538,12 @@ body.ocean-theme .action-btn:hover:not(:disabled) {
 }
 
 .history-section {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.9);
     border-radius: 28px;
     padding: 28px 20px;
-    box-shadow: 0 8px 32px rgba(161, 140, 209, 0.13);
+    box-shadow: 0 8px 32px rgba(79, 172, 254, 0.15);
     margin-top: 12px;
+    backdrop-filter: blur(10px);
 }
 
 body.ocean-theme .history-section {
@@ -551,14 +561,14 @@ body.ocean-theme .history-section {
 }
 
 .history-item {
-    background: #f7f6fd;
-    border: 2px solid #fbc2eb;
+    background: rgba(255,255,255,0.8);
+    border: 2px solid #4facfe;
     border-radius: 18px;
     padding: 16px 18px;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    box-shadow: 0 2px 8px rgba(161, 140, 209, 0.08);
+    box-shadow: 0 2px 8px rgba(79, 172, 254, 0.1);
     transition: box-shadow 0.2s, border 0.2s;
 }
 
@@ -569,8 +579,8 @@ body.ocean-theme .history-item {
 }
 
 .history-item:hover {
-    box-shadow: 0 8px 24px rgba(161, 140, 209, 0.18);
-    border-color: #a18cd1;
+    box-shadow: 0 8px 24px rgba(79, 172, 254, 0.2);
+    border-color: #00f2fe;
 }
 
 body.ocean-theme .history-item:hover {
@@ -585,7 +595,7 @@ body.ocean-theme .history-item:hover {
 }
 
 .history-number {
-    background: #a18cd1;
+    background: #4facfe;
     color: #fff;
     padding: 6px 14px;
     border-radius: 14px;
@@ -599,7 +609,7 @@ body.ocean-theme .history-number {
 }
 
 .history-type {
-    color: #7c5fe6;
+    color: #1e3c72;
     font-size: 0.95rem;
     font-weight: 600;
     margin-bottom: 2px;
@@ -610,7 +620,7 @@ body.ocean-theme .history-type {
 }
 
 .history-time {
-    color: #b8a1d1;
+    color: #2a5298;
     font-size: 0.95rem;
     white-space: nowrap;
     margin-left: 8px;
@@ -621,7 +631,7 @@ body.ocean-theme .history-time {
 }
 
 .placeholder {
-    color: #b8a1d1;
+    color: #1e3c72;
     font-style: italic;
     text-align: center;
     font-size: 1.05rem;
@@ -936,7 +946,7 @@ body.ocean-theme .shark-bubble {
 
 /* Button loading state */
 .generate-btn.loading {
-    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
     color: #fff;
     cursor: not-allowed;
     position: relative;

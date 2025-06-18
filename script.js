@@ -6,8 +6,10 @@ class RandomParameterApp {
         this.loadHistory();
         this.currentTab = 'list';
         
-        // Mặc định hiển thị tab list
+        // Mặc định hiển thị tab list và kích hoạt ocean theme
         this.switchTab('list');
+        document.body.classList.add('ocean-theme');
+        this.activateOceanEffects();
     }
 
     initializeElements() {
@@ -98,14 +100,9 @@ class RandomParameterApp {
             content.classList.toggle('active', content.id === `${tabName}-tab`);
         });
 
-        // Toggle ocean theme for list tab
-        if (tabName === 'list') {
-            document.body.classList.add('ocean-theme');
-            this.activateOceanEffects();
-        } else {
-            document.body.classList.remove('ocean-theme');
-            this.deactivateOceanEffects();
-        }
+        // Luôn giữ ocean theme cho cả hai tab
+        document.body.classList.add('ocean-theme');
+        this.activateOceanEffects();
     }
 
     validateInputs() {
