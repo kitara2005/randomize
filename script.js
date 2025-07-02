@@ -614,8 +614,8 @@ class RandomParameterApp {
             if (fishes.length < 2) {
                 errorMessage = 'Cần ít nhất 2 con cá để đua';
                 isValid = false;
-            } else if (fishes.length > 8) {
-                errorMessage = 'Tối đa 8 con cá có thể tham gia đua';
+            } else if (fishes.length > 15) {
+                errorMessage = 'Tối đa 15 con cá có thể tham gia đua';
                 isValid = false;
             }
         }
@@ -790,6 +790,48 @@ class RandomParameterApp {
                 body: '#4169E1', fins: '#0000CD', tail: '#191970',
                 shape: 'sword', // Cá kiếm dài
                 pattern: 'sleek'
+            },
+            {
+                name: 'Salmon',
+                body: '#FFA07A', fins: '#FF7F50', tail: '#FF6347',
+                shape: 'torpedo', // Cá hồi thon dài
+                pattern: 'gradient'
+            },
+            {
+                name: 'Beta',
+                body: '#8A2BE2', fins: '#9370DB', tail: '#BA55D3',
+                shape: 'tall', // Cá betta cao
+                pattern: 'flowing'
+            },
+            {
+                name: 'Catfish',
+                body: '#696969', fins: '#708090', tail: '#778899',
+                shape: 'muscular', // Cá da trơn cơ bắp
+                pattern: 'whiskers'
+            },
+            {
+                name: 'Rainbow',
+                body: '#FF1493', fins: '#00CED1', tail: '#32CD32',
+                shape: 'slim', // Cá cầu vồng mảnh
+                pattern: 'rainbow'
+            },
+            {
+                name: 'Barracuda',
+                body: '#2F4F4F', fins: '#36454F', tail: '#1C1C1C',
+                shape: 'sword', // Cá nhồng dài
+                pattern: 'predator'
+            },
+            {
+                name: 'Seahorse',
+                body: '#20B2AA', fins: '#48D1CC', tail: '#00CED1',
+                shape: 'tall', // Cá ngựa cao
+                pattern: 'unique'
+            },
+            {
+                name: 'Nemo',
+                body: '#FF4500', fins: '#FF6347', tail: '#FF8C00',
+                shape: 'oval', // Cá Nemo oval
+                pattern: 'movie'
             }
         ];
         
@@ -1297,7 +1339,7 @@ class RandomParameterApp {
             const fishText = this.fishInput.value.trim();
             if (fishText) {
                 const fishes = this.parseFishList(fishText);
-                if (fishes.length >= 2 && fishes.length <= 8) {
+                if (fishes.length >= 2 && fishes.length <= 15) {
                     this.clearFishError();
                 }
             }

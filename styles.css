@@ -814,7 +814,7 @@ body.ocean-theme .setting-group small {
     background: linear-gradient(180deg, #e0f2fe 0%, #b3e5fc 100%);
     border-radius: 12px;
     padding: 20px;
-    min-height: 400px;
+    min-height: 600px;
     position: relative;
     overflow: hidden;
     border: 2px solid #0ea5e9;
@@ -830,19 +830,19 @@ body.ocean-theme .race-track {
     justify-content: center;
     align-items: center;
     height: 100%;
-    min-height: 360px;
+    min-height: 560px;
 }
 
 .race-lane {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-    padding: 10px;
+    margin-bottom: 8px;
+    padding: 8px;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     border: 1px dashed #0ea5e9;
     position: relative;
-    height: 110px;
+    height: 80px;
 }
 
 body.ocean-theme .race-lane {
@@ -857,12 +857,12 @@ body.ocean-theme .race-lane {
     align-items: center;
     transition: transform 0.1s ease;
     z-index: 10;
-    height: 90px;
+    height: 65px;
 }
 
 .fish-svg {
-    width: 150px;
-    height: 90px;
+    width: 120px;
+    height: 65px;
     animation: fishBodySwim 1.2s ease-in-out infinite;
 }
 
