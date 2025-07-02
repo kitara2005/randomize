@@ -1,9 +1,7 @@
 class RandomParameterApp {
     constructor() {
-        this.history = JSON.parse(localStorage.getItem('randomHistory') || '[]');
         this.initializeElements();
         this.bindEvents();
-        this.loadHistory();
         this.currentTab = 'list';
         
         // Mặc định hiển thị tab list và kích hoạt ocean theme
@@ -35,9 +33,6 @@ class RandomParameterApp {
         this.listResultDisplay = document.getElementById('listResult');
         this.copyListBtn = document.getElementById('copyListBtn');
         this.clearListBtn = document.getElementById('clearListBtn');
-        
-        // History elements
-        this.historyContainer = document.getElementById('history');
         
         // Loading elements
         this.loadingOverlay = document.getElementById('loadingOverlay');
@@ -225,7 +220,6 @@ class RandomParameterApp {
             const results = this.generateNumbers(min, max, count, decimalPlaces, allowDuplicates, sortResults);
             
             this.displayResults(results, this.resultDisplay);
-            this.addToHistory(results, 'numbers');
             this.enableActionButtons(this.copyBtn, this.clearBtn);
             
             // Create confetti effect
@@ -263,7 +257,6 @@ class RandomParameterApp {
             this.createWaveEffect();
 
             this.displayListResults(shuffledResults, this.listResultDisplay);
-            this.addToHistory(shuffledResults, 'list');
             this.enableActionButtons(this.copyListBtn, this.clearListBtn);
             
         } catch (error) {
@@ -305,65 +298,7 @@ class RandomParameterApp {
         `;
     }
 
-    addToHistory(results, type) {
-        const historyItem = {
-            type: type,
-            results: results,
-            timestamp: new Date().toLocaleString('vi-VN'),
-            settings: type === 'numbers' ? {
-                min: parseFloat(this.minValueInput.value),
-                max: parseFloat(this.maxValueInput.value),
-                count: parseInt(this.countInput.value),
-                decimalPlaces: parseInt(this.decimalPlacesInput.value),
-                allowDuplicates: this.allowDuplicatesCheckbox.checked,
-                sortResults: this.sortResultsCheckbox.checked
-            } : {
-                // Không cần lưu settings cho list nữa vì chỉ shuffle toàn bộ danh sách
-            }
-        };
 
-        this.history.unshift(historyItem);
-        
-        // Keep only last 20 items
-        if (this.history.length > 20) {
-            this.history = this.history.slice(0, 20);
-        }
-
-        localStorage.setItem('randomHistory', JSON.stringify(this.history));
-        this.loadHistory();
-    }
-
-    loadHistory() {
-        if (this.history.length === 0) {
-            this.historyContainer.innerHTML = '<p class="placeholder">Chưa có lịch sử</p>';
-            return;
-        }
-
-        const historyHtml = this.history.map(item => {
-            const resultsHtml = item.results.map(result => 
-                `<span class="history-number">${result}</span>`
-            ).join('');
-
-            const typeIcon = item.type === 'numbers' ? '🔢' : '📝';
-            const typeText = item.type === 'numbers' ? 'Random số' : 'Random danh sách';
-
-            return `
-                <div class="history-item">
-                    <div class="history-info">
-                        <div class="history-type">${typeIcon} ${typeText}</div>
-                        <div class="history-numbers">
-                            ${resultsHtml}
-                        </div>
-                    </div>
-                    <div class="history-time">
-                        ${item.timestamp}
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        this.historyContainer.innerHTML = historyHtml;
-    }
 
     copyResults(displayElement) {
         let content = '';
@@ -373,15 +308,15 @@ class RandomParameterApp {
         const numberBadges = displayElement.querySelectorAll('.number-badge');
         
         if (listItems.length > 0) {
-            // Đối với list, chỉ lấy giá trị không lấy số thứ tự, không có dấu phẩy
+            // Đối với list, mỗi item trên một dòng riêng biệt
             content = Array.from(listItems)
                 .map(item => item.textContent.replace(/^\d+\.\s*/, '')) // Loại bỏ số thứ tự và dấu chấm
-                .join(' '); // Chỉ dùng khoảng trắng, không có dấu phẩy
+                .join('\n'); // Mỗi kết quả trên một dòng
         } else if (numberBadges.length > 0) {
-            // Đối với numbers, lấy giá trị như cũ với dấu phẩy
+            // Đối với numbers, cũng mỗi số trên một dòng
             content = Array.from(numberBadges)
                 .map(badge => badge.textContent)
-                .join(', ');
+                .join('\n'); // Mỗi số trên một dòng
         }
 
         if (content) {
@@ -640,6 +575,8 @@ class RandomParameterApp {
 
         return results;
     }
+
+
 }
 
 // Initialize the app when DOM is loaded
@@ -696,17 +633,6 @@ style.textContent = `
         }
     }
     
-    .history-info {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        flex: 1;
-    }
-    
-    .history-type {
-        font-size: 0.8rem;
-        color: #667eea;
-        font-weight: 600;
-    }
+
 `;
 document.head.appendChild(style); 
