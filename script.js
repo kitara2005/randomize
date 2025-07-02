@@ -36,7 +36,7 @@ class RandomParameterApp {
         
         // Fish race elements
         this.fishInput = document.getElementById('fishInput');
-        this.raceSpeed = document.getElementById('raceSpeed');
+        this.maxRaceTime = document.getElementById('maxRaceTime');
         this.startRaceBtn = document.getElementById('startRaceBtn');
         this.raceTrack = document.getElementById('raceTrack');
         this.raceResults = document.getElementById('raceResults');
@@ -102,6 +102,9 @@ class RandomParameterApp {
         [this.fishInput].forEach(input => {
             input.addEventListener('input', () => this.validateFishInputs());
         });
+
+        // Race time validation
+        this.maxRaceTime.addEventListener('input', () => this.validateRaceTimeInputs());
     }
 
     switchTab(tabName) {
@@ -617,11 +620,19 @@ class RandomParameterApp {
             }
         }
 
+        // Also check race time validation (but don't show error from here)
+        const raceTimeValid = this.validateRaceTimeInputs();
+        if (!raceTimeValid) {
+            isValid = false;
+            // validateRaceTimeInputs already handles showing the error
+        }
+
         this.startRaceBtn.disabled = !isValid;
         
-        if (!isValid && fishText) {
+        if (!isValid && fishText && raceTimeValid) {
+            // Only show fish error if race time is valid
             this.showFishError(errorMessage);
-        } else {
+        } else if (isValid) {
             this.clearFishError();
         }
 
@@ -1267,19 +1278,44 @@ class RandomParameterApp {
         }
     }
 
-    getRaceSpeedRange() {
-        const speedSetting = this.raceSpeed.value;
-        
-        switch(speedSetting) {
-            case 'slow':
-                return { min: 4, max: 7 }; // 4-7 seconds
-            case 'fast':
-                return { min: 1, max: 3 }; // 1-3 seconds
-            case 'lightning':
-                return { min: 0.5, max: 1.5 }; // 0.5-1.5 seconds
-            default: // normal
-                return { min: 2, max: 5 }; // 2-5 seconds
+    validateRaceTimeInputs() {
+        const maxTime = parseFloat(this.maxRaceTime.value);
+
+        let isValid = true;
+        let errorMessage = '';
+
+        // Validate max time value
+        if (isNaN(maxTime) || maxTime < 1.1 || maxTime > 30) {
+            errorMessage = 'Thời gian đua tối đa phải từ 1.1 đến 30 giây';
+            isValid = false;
         }
+
+        if (!isValid) {
+            this.showFishError(errorMessage);
+        } else {
+            // Clear error only if there's no fish validation error
+            const fishText = this.fishInput.value.trim();
+            if (fishText) {
+                const fishes = this.parseFishList(fishText);
+                if (fishes.length >= 2 && fishes.length <= 8) {
+                    this.clearFishError();
+                }
+            }
+        }
+
+        return isValid;
+    }
+
+    getRaceSpeedRange() {
+        const maxTime = parseFloat(this.maxRaceTime.value) || 5;
+        const minTime = 1; // Fixed minimum time of 1 second
+        
+        // Ensure valid range
+        if (maxTime <= minTime) {
+            return { min: 1, max: 5 }; // fallback to default
+        }
+        
+        return { min: minTime, max: maxTime };
     }
 
     async animateRace(fishNames) {

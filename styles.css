@@ -735,9 +735,15 @@ body.ocean-theme .race-settings h3 {
 
 .setting-group {
     display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.setting-group .input-row {
+    display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 15px;
 }
 
 .setting-group:last-child {
@@ -754,7 +760,7 @@ body.ocean-theme .setting-group label {
     color: #e5e7eb;
 }
 
-.setting-group select {
+.setting-group input[type="number"] {
     flex: 1;
     padding: 10px 15px;
     border: 2px solid #e5e7eb;
@@ -762,25 +768,40 @@ body.ocean-theme .setting-group label {
     background: white;
     font-size: 0.95rem;
     color: #374151;
-    cursor: pointer;
     transition: all 0.2s ease;
+    width: 100px;
 }
 
-.setting-group select:focus {
+.setting-group input[type="number"]:focus {
     outline: none;
     border-color: #0ea5e9;
     box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
 }
 
-body.ocean-theme .setting-group select {
+body.ocean-theme .setting-group input[type="number"] {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(14, 165, 233, 0.3);
     color: #e5e7eb;
 }
 
-body.ocean-theme .setting-group select:focus {
+body.ocean-theme .setting-group input[type="number"]:focus {
     border-color: #38bdf8;
     box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+body.ocean-theme .setting-group input[type="number"]::placeholder {
+    color: rgba(229, 231, 235, 0.6);
+}
+
+.setting-group small {
+    color: #6b7280;
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-left: 0;
+}
+
+body.ocean-theme .setting-group small {
+    color: rgba(229, 231, 235, 0.7);
 }
 
 .race-controls {
