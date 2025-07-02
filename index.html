@@ -6,6 +6,8 @@
     <title>Ứng dụng Random Tham số</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
 <body>
     <!-- Ocean waves effect -->
@@ -44,6 +46,7 @@
             <div class="tab-navigation">
                 <button class="tab-btn" data-tab="numbers">🔢 Random Số</button>
                 <button class="tab-btn active" data-tab="list">📝 Random Danh sách</button>
+                <button class="tab-btn" data-tab="fish-race">🐠 Đua Cá</button>
             </div>
 
             <!-- Numbers Tab -->
@@ -119,6 +122,47 @@
                 </div>
             </div>
 
+            <!-- Fish Race Tab -->
+            <div class="tab-content" id="fish-race-tab">
+                <div class="input-section">
+                    <h2>🐠 Game Đua Cá</h2>
+                    <div class="fish-input-group">
+                        <label for="fishInput">Nhập tên các con cá (mỗi dòng một tên):</label>
+                        <textarea id="fishInput" placeholder="Nhập tên cá ở đây...&#10;Ví dụ:&#10;Nemo&#10;Dory&#10;Marlin&#10;Bruce&#10;Gill" rows="6"></textarea>
+                    </div>
+                    
+                    <div class="race-settings">
+                        <h3>⚙️ Cài đặt cuộc đua</h3>
+                        <div class="setting-group">
+                            <label for="raceSpeed">Tốc độ đua:</label>
+                            <select id="raceSpeed">
+                                <option value="slow">🐌 Chậm (4-7 giây)</option>
+                                <option value="normal" selected>🐠 Bình thường (2-5 giây)</option>
+                                <option value="fast">🚀 Nhanh (1-3 giây)</option>
+                                <option value="lightning">⚡ Siêu nhanh (0.5-1.5 giây)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="race-controls">
+                        <button id="startRaceBtn" class="generate-btn">🏁 Bắt đầu đua!</button>
+                    </div>
+                </div>
+
+                <div class="result-section">
+                    <h2>🏆 Đường đua</h2>
+                    <div id="raceTrack" class="race-track">
+                        <div class="race-instructions">
+                            <p class="placeholder">Nhập tên cá và nhấn "Bắt đầu đua!" để xem cuộc đua</p>
+                        </div>
+                    </div>
+                    
+                    <div id="raceResults" class="race-results" style="display: none;">
+                        <h3>🏆 Kết quả cuộc đua</h3>
+                        <div id="fullResults" class="full-results"></div>
+                    </div>
+                </div>
+            </div>
 
         </main>
     </div>
